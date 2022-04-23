@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -61,4 +62,32 @@ public class GuitarrasTestService {
         Assertions.assertEquals("Acero", guitarra1.block().getTipoCuerda());
         Assertions.assertEquals("E", guitarra1.block().getAfinacion());
     }
+
+    @Test
+    @DisplayName("Find All Guitarras")
+    void findAllTest(){
+        Guitarra guitarra = new Guitarra();
+        guitarra.setId("rtrt2");
+        guitarra.setTipo("Acustica");
+        guitarra.setModelo("Guitarra acustica concert");
+        guitarra.setMarca("FENDER");
+        guitarra.setPrecio(2500000D);
+        guitarra.setNumCuerdas(6);
+        guitarra.setTipoCuerda("Acero");
+        guitarra.setAfinacion("E");
+        Flux<Guitarra> list = Flux.just(modelMapper().map(guitarra, Guitarra.class));
+
+        when(repository.findAll()).thenReturn(list);
+
+        Flux<Guitarra> lista = service.findAll();
+        Assertions.assertEquals("rtrt2", lista.blockFirst().getId());
+        Assertions.assertEquals("Acustica", lista.blockFirst().getTipo());
+        Assertions.assertEquals("Guitarra acustica concert", lista.blockFirst().getModelo());
+        Assertions.assertEquals("FENDER", lista.blockFirst().getMarca());
+        Assertions.assertEquals(2500000D, lista.blockFirst().getPrecio());
+        Assertions.assertEquals(6, lista.blockFirst().getNumCuerdas());
+        Assertions.assertEquals("Acero", lista.blockFirst().getTipoCuerda());
+        Assertions.assertEquals("E", lista.blockFirst().getAfinacion());
+    }
+
 }
