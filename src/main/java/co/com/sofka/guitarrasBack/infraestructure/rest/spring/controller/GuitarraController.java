@@ -5,10 +5,7 @@ import co.com.sofka.guitarrasBack.domain.Guitarra;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -23,14 +20,27 @@ public class GuitarraController {
     }
 
     @PostMapping("/guitarra/crear")
-    public Mono<GuitarraDTO> save(@RequestBody GuitarraDTO guitarra){
+    public Mono<GuitarraDTO> save(@RequestBody GuitarraDTO guitarra) {
         return service.save(modelMapper().map(guitarra, Guitarra.class))
-                .map(guitarra1->modelMapper().map(guitarra1, GuitarraDTO.class));
+                .map(guitarra1 -> modelMapper().map(guitarra1, GuitarraDTO.class));
     }
 
     @GetMapping("/guitarra")
-    public Flux<GuitarraDTO> findAll(){
+    public Flux<GuitarraDTO> findAll() {
         return service.findAll()
+                .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
+    }
+
+    @GetMapping("/bibliotecaReactiva/{tipo}/{modelo}/{marca}/{cuerdas}/{tipoCuerdas}/{afinacion}")
+    public Flux<GuitarraDTO> recomendacion(
+            @PathVariable("tipo") String tipo,
+            @PathVariable("modelo") String modelo,
+            @PathVariable("marca") String marca,
+            @PathVariable("cuerdas") Integer numCuerdas,
+            @PathVariable("tipoCuerdas") String tipoCuerdas,
+            @PathVariable("afinacion") String afinacion
+    ) {
+        return service.findEspesificGuitar(tipo, modelo, marca, numCuerdas, tipoCuerdas, afinacion)
                 .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 

@@ -24,12 +24,19 @@ public class GuitarraDTOService implements GuitarraRepository {
     @Override
     public Mono<Guitarra> save(Guitarra guitarra) {
         return repository.save(modelMapper().map(guitarra, GuitarraDTO.class))
-                .map(guitarra1-> modelMapper().map(guitarra1, Guitarra.class ));
+                .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
     }
 
     @Override
     public Flux<Guitarra> findAll() {
         return repository.findAll()
+                .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
+    }
+
+    @Override
+    public Flux<Guitarra> findEspesificGuitar
+            (String tipo, String modelo, String marca, Integer numCuerdas, String tipoCuerdas, String afinacion) {
+        return repository.findEspesificGuitar(tipo, modelo, marca, numCuerdas, tipoCuerdas, afinacion)
                 .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
     }
 }
