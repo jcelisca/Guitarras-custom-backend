@@ -67,4 +67,48 @@ public class GuitarrasTestController {
                     Assertions.assertEquals("E", response.get(0).getAfinacion());
                 });
     }
+
+    @Test
+    @DisplayName("GET / filtro guitarra completo")
+    void filtroGuitarraCompleto(){
+        Guitarra guitarra = new Guitarra();
+        guitarra.setId("rtrt2");
+        guitarra.setTipo("Acustica");
+        guitarra.setModelo("Concert");
+        guitarra.setMarca("FENDER");
+        guitarra.setPrecio(2500000D);
+        guitarra.setNumCuerdas(6);
+        guitarra.setTipoCuerda("Acero");
+        guitarra.setAfinacion("E");
+
+        Guitarra guitarra2 = new Guitarra();
+        guitarra2.setId("rtrt3");
+        guitarra2.setTipo("Acustica");
+        guitarra2.setModelo("Grand Concert");
+        guitarra2.setMarca("FENDER");
+        guitarra2.setPrecio(2500000D);
+        guitarra2.setNumCuerdas(6);
+        guitarra2.setTipoCuerda("Nylon");
+        guitarra2.setAfinacion("E");
+
+        Flux<Guitarra> list = Flux.just(modelMapper().map(guitarra2, Guitarra.class), modelMapper().map(guitarra, Guitarra.class));
+
+        when(service.findByTipo("Acustica")).thenReturn(list);
+
+        webTestClient.get()
+                .uri("/guitarra/{tipo}/{modelo}/{marca}/{numCuerdas}/{tipoCuerdas}/{afinacion}","Acustica","Concert","FENDER",6, "Acero", "E")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(Guitarra.class)
+                .value(response->{
+                    Assertions.assertEquals("rtrt2", response.get(0).getId());
+                    Assertions.assertEquals("Acustica", response.get(0).getTipo());
+                    Assertions.assertEquals("Concert", response.get(0).getModelo());
+                    Assertions.assertEquals("FENDER", response.get(0).getMarca());
+                    Assertions.assertEquals(2500000D, response.get(0).getPrecio());
+                    Assertions.assertEquals(6, response.get(0).getNumCuerdas());
+                    Assertions.assertEquals("Acero", response.get(0).getTipoCuerda());
+                    Assertions.assertEquals("E", response.get(0).getAfinacion());
+                });
+    }
 }
