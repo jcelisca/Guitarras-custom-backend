@@ -142,4 +142,56 @@ public class GuitarrasTestService {
 
     }
 
+    @Test
+    @DisplayName("Find By Marca")
+    void findByMarcaTest(){
+        Guitarra guitarra = new Guitarra();
+        guitarra.setId("rtrt2");
+        guitarra.setTipo("Acustica");
+        guitarra.setModelo("Guitarra acustica concert");
+        guitarra.setMarca("FENDER");
+        guitarra.setPrecio(2500000D);
+        guitarra.setNumCuerdas(6);
+        guitarra.setTipoCuerda("Acero");
+        guitarra.setAfinacion("E");
+
+        Guitarra guitarra2 = new Guitarra();
+        guitarra2.setId("rtrt3");
+        guitarra2.setTipo("Electrica");
+        guitarra2.setModelo("Guitarra acustica concert");
+        guitarra2.setMarca("YAMAHA");
+        guitarra2.setPrecio(2500000D);
+        guitarra2.setNumCuerdas(6);
+        guitarra2.setTipoCuerda("Acero");
+        guitarra2.setAfinacion("E");
+
+
+        Flux<Guitarra> list = Flux.just(modelMapper().map(guitarra, Guitarra.class));
+        Flux<Guitarra> list2 = Flux.just(modelMapper().map(guitarra2, Guitarra.class));
+
+        when(repository.findByMarca("FENDER")).thenReturn(list);
+        when(repository.findByMarca("YAMAHA")).thenReturn(list2);
+
+        Flux<Guitarra> lista = service.findByMarca("FENDER");
+        Assertions.assertEquals("rtrt2", lista.blockFirst().getId());
+        Assertions.assertEquals("Acustica", lista.blockFirst().getTipo());
+        Assertions.assertEquals("Guitarra acustica concert", lista.blockFirst().getModelo());
+        Assertions.assertEquals("FENDER", lista.blockFirst().getMarca());
+        Assertions.assertEquals(2500000D, lista.blockFirst().getPrecio());
+        Assertions.assertEquals(6, lista.blockFirst().getNumCuerdas());
+        Assertions.assertEquals("Acero", lista.blockFirst().getTipoCuerda());
+        Assertions.assertEquals("E", lista.blockFirst().getAfinacion());
+
+        Flux<Guitarra> lista2 = service.findByMarca("YAMAHA");
+        Assertions.assertEquals("rtrt3", lista2.blockFirst().getId());
+        Assertions.assertEquals("Electrica", lista2.blockFirst().getTipo());
+        Assertions.assertEquals("Guitarra acustica concert", lista2.blockFirst().getModelo());
+        Assertions.assertEquals("YAMAHA", lista2.blockFirst().getMarca());
+        Assertions.assertEquals(2500000D, lista2.blockFirst().getPrecio());
+        Assertions.assertEquals(6, lista2.blockFirst().getNumCuerdas());
+        Assertions.assertEquals("Acero", lista2.blockFirst().getTipoCuerda());
+        Assertions.assertEquals("E", lista2.blockFirst().getAfinacion());
+
+    }
+
 }
