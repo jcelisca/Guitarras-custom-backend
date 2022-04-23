@@ -246,4 +246,52 @@ public class GuitarrasTestService {
 
     }
 
+    @Test
+    @DisplayName("Find By ID")
+    void findByIdTest(){
+        Guitarra guitarra = new Guitarra();
+        guitarra.setId("rtrt2");
+        guitarra.setTipo("Acustica");
+        guitarra.setModelo("Concert");
+        guitarra.setMarca("FENDER");
+        guitarra.setPrecio(2500000D);
+        guitarra.setNumCuerdas(6);
+        guitarra.setTipoCuerda("Acero");
+        guitarra.setAfinacion("E");
+
+        Guitarra guitarra2 = new Guitarra();
+        guitarra2.setId("rtrt3");
+        guitarra2.setTipo("Electrica");
+        guitarra2.setModelo("Grand Concert");
+        guitarra2.setMarca("YAMAHA");
+        guitarra2.setPrecio(2500000D);
+        guitarra2.setNumCuerdas(6);
+        guitarra2.setTipoCuerda("Acero");
+        guitarra2.setAfinacion("E");
+
+        when(repository.findById("rtrt2")).thenReturn(Mono.just(guitarra));
+        when(repository.findById("rtrt3")).thenReturn(Mono.just(guitarra2));
+
+        Mono<Guitarra> lista = service.findById("rtrt2");
+        Assertions.assertEquals("rtrt2", lista.block().getId());
+        Assertions.assertEquals("Acustica", lista.block().getTipo());
+        Assertions.assertEquals("Concert", lista.block().getModelo());
+        Assertions.assertEquals("FENDER", lista.block().getMarca());
+        Assertions.assertEquals(2500000D, lista.block().getPrecio());
+        Assertions.assertEquals(6, lista.block().getNumCuerdas());
+        Assertions.assertEquals("Acero", lista.block().getTipoCuerda());
+        Assertions.assertEquals("E", lista.block().getAfinacion());
+
+        Mono<Guitarra> lista2 = service.findById("rtrt3");
+        Assertions.assertEquals("rtrt3", lista2.block().getId());
+        Assertions.assertEquals("Electrica", lista2.block().getTipo());
+        Assertions.assertEquals("Grand Concert", lista2.block().getModelo());
+        Assertions.assertEquals("YAMAHA", lista2.block().getMarca());
+        Assertions.assertEquals(2500000D, lista2.block().getPrecio());
+        Assertions.assertEquals(6, lista2.block().getNumCuerdas());
+        Assertions.assertEquals("Acero", lista2.block().getTipoCuerda());
+        Assertions.assertEquals("E", lista2.block().getAfinacion());
+
+    }
+
 }
