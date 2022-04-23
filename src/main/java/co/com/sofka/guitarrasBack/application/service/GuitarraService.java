@@ -27,5 +27,9 @@ public class GuitarraService {
         return repository.findByMarca(marca);
     }
 
+    public Flux<Guitarra> findByModelo(String modelo){
+        return repository.findByModelo(modelo);
+    }
+
 
 }

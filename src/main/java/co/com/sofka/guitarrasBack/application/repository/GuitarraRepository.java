@@ -9,4 +9,5 @@ public interface GuitarraRepository {
     Flux<Guitarra> findAll();
     Flux<Guitarra> findByTipo(String tipo);
     Flux<Guitarra> findByMarca(String marca);
+    Flux<Guitarra> findByModelo(String modelo);
 }

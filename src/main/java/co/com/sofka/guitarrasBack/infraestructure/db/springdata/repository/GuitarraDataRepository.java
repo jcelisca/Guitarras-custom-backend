@@ -10,4 +10,5 @@ import reactor.core.publisher.Flux;
 public interface GuitarraDataRepository extends ReactiveMongoRepository<GuitarraDTO, String> {
     Flux<GuitarraDTO> findByTipo(String tipo);
     Flux<GuitarraDTO> findByMarca(String marca);
+    Flux<GuitarraDTO> findByModelo(String modelo);
 }
