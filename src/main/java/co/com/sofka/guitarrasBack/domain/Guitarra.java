@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Guitarra {
-
     private String id;
     private String tipo;
     private String modelo;

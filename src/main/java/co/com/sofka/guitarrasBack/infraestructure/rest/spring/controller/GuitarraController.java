@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -25,6 +26,12 @@ public class GuitarraController {
     public Mono<GuitarraDTO> save(@RequestBody GuitarraDTO guitarra){
         return service.save(modelMapper().map(guitarra, Guitarra.class))
                 .map(guitarra1->modelMapper().map(guitarra1, GuitarraDTO.class));
+    }
+
+    @GetMapping("/guitarra")
+    public Flux<GuitarraDTO> findAll(){
+        return service.findAll()
+                .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 
     //@GetMapping("/guitarra/{tipo}/{modelo}/")

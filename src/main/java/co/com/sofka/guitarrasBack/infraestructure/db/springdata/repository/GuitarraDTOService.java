@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @EnableReactiveMongoRepositories(basePackages = "co.com.sofka.guitarrasBack.infraestructure.db.springdata.repository")
@@ -24,5 +25,11 @@ public class GuitarraDTOService implements GuitarraRepository {
     public Mono<Guitarra> save(Guitarra guitarra) {
         return repository.save(modelMapper().map(guitarra, GuitarraDTO.class))
                 .map(guitarra1-> modelMapper().map(guitarra1, Guitarra.class ));
+    }
+
+    @Override
+    public Flux<Guitarra> findAll() {
+        return repository.findAll()
+                .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
     }
 }
