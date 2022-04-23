@@ -31,5 +31,8 @@ public class GuitarraService {
         return repository.findByModelo(modelo);
     }
 
+    public Mono<Guitarra> findById(String id){
+        return repository.findById(id);
+    }
 
 }

@@ -51,4 +51,10 @@ public class GuitarraDTOService implements GuitarraRepository {
                 .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
     }
 
+    @Override
+    public Mono<Guitarra> findById(String id) {
+        return repository.findById(id)
+                .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
+    }
+
 }

@@ -78,4 +78,12 @@ public class GuitarraController {
         return service.findByModelo(modelo)
                 .map(g -> modelMapper().map(g, GuitarraDTO.class));
     }
+
+    @GetMapping("/guitarra/id/{id}")
+    public Mono<GuitarraDTO> findById(
+            @PathVariable("id") String id
+    ) {
+        return service.findById(id)
+                .map(g -> modelMapper().map(g, GuitarraDTO.class));
+    }
 }
