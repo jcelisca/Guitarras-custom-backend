@@ -3,11 +3,16 @@ package co.com.sofka.guitarrasBack.infraestructure.rest.spring.controller;
 import co.com.sofka.guitarrasBack.application.service.GuitarraService;
 import co.com.sofka.guitarrasBack.domain.Guitarra;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraDTO;
+import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,40 +30,31 @@ public class GuitarraController {
                 .map(guitarra1 -> modelMapper().map(guitarra1, GuitarraDTO.class));
     }
 
+
     @GetMapping("/guitarra")
     public Flux<GuitarraDTO> findAll() {
         return service.findAll()
                 .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 
-    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}")
-    public Flux<GuitarraDTO> filtrarGuitarra(
-            @PathVariable("tipo") String tipo,
-            @PathVariable("modelo") String modelo,
-            @PathVariable("marca") String marca
-    ) {
-        return service.findByTipo(tipo)
-                .filter(guitarra -> guitarra.getModelo().equals(modelo) && guitarra.getMarca().equals(marca))
+    @GetMapping("/guitarra/search")
+    public Flux<GuitarraDTO> filtrarGuitarra(@RequestBody GuitarraResponseDTO guitarraResponse) {
+        return service.findByTipo(guitarraResponse.getTipo())
+                .filter(guitarra -> guitarra.getModelo().equals(guitarraResponse.getModelo())
+                        && guitarra.getMarca().equals(guitarraResponse.getMarca()))
                 .map(g -> modelMapper().map(g, GuitarraDTO.class));
     }
 
-    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}/{numCuerdas}/{tipoCuerdas}/{afinacion}")
-    public Flux<GuitarraDTO> filtrarGuitarraCompleto(
-            @PathVariable("tipo") String tipo,
-            @PathVariable("modelo") String modelo,
-            @PathVariable("marca") String marca,
-            @PathVariable("numCuerdas") Integer numCuerdas,
-            @PathVariable("tipoCuerdas") String tipoCuerdas,
-            @PathVariable("afinacion") String afinacion
 
-    ) {
-        return service.findByTipo(tipo)
+    @GetMapping("/guitarra/search/completo")
+    public Flux<GuitarraDTO> filtrarGuitarraCompleto(@RequestBody GuitarraResponseDTO guitarraResponse) {
+        return service.findByTipo(guitarraResponse.getTipo())
                 .filter(guitarra ->
-                        guitarra.getModelo().equals(modelo) &&
-                                guitarra.getMarca().equals(marca) &&
-                                guitarra.getNumCuerdas().equals(numCuerdas) &&
-                                guitarra.getTipoCuerda().equals(tipoCuerdas) &&
-                                guitarra.getAfinacion().equals(afinacion)
+                        guitarra.getModelo().equals(guitarraResponse.getModelo()) &&
+                                guitarra.getMarca().equals(guitarraResponse.getMarca()) &&
+                                guitarra.getNumCuerdas().equals(guitarraResponse.getNumCuerdas()) &&
+                                guitarra.getTipoCuerda().equals(guitarraResponse.getTipoCuerda()) &&
+                                guitarra.getAfinacion().equals(guitarraResponse.getAfinacion())
                 )
                 .map(g -> modelMapper().map(g, GuitarraDTO.class));
     }
