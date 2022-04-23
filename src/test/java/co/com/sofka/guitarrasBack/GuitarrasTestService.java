@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
@@ -42,6 +43,11 @@ public class GuitarrasTestService {
         guitarra.setId("rtrt2");
         guitarra.setTipo("Acustica");
         guitarra.setModelo("Guitarra acustica concert");
+        guitarra.setMarca("FENDER");
+        guitarra.setPrecio(2500000D);
+        guitarra.setNumCuerdas(6);
+        guitarra.setTipoCuerda("Acero");
+        guitarra.setAfinacion("E");
 
         when(repository.save(any())).thenReturn(Mono.just(guitarra));
 
@@ -49,5 +55,10 @@ public class GuitarrasTestService {
         Assertions.assertEquals("rtrt2", guitarra1.block().getId());
         Assertions.assertEquals("Acustica", guitarra1.block().getTipo());
         Assertions.assertEquals("Guitarra acustica concert", guitarra1.block().getModelo());
+        Assertions.assertEquals("FENDER", guitarra1.block().getMarca());
+        Assertions.assertEquals(2500000D, guitarra1.block().getPrecio());
+        Assertions.assertEquals(6, guitarra1.block().getNumCuerdas());
+        Assertions.assertEquals("Acero", guitarra1.block().getTipoCuerda());
+        Assertions.assertEquals("E", guitarra1.block().getAfinacion());
     }
 }
