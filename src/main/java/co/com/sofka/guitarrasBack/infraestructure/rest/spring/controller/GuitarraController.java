@@ -31,12 +31,12 @@ public class GuitarraController {
                 .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 
-    @GetMapping("/bibliotecaReactiva/{tipo}/{modelo}/{marca}/{cuerdas}/{tipoCuerdas}/{afinacion}")
-    public Flux<GuitarraDTO> recomendacion(
+    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}/{numCuerdas}/{tipoCuerdas}/{afinacion}")
+    public Flux<GuitarraDTO> findEspesificGuitar(
             @PathVariable("tipo") String tipo,
             @PathVariable("modelo") String modelo,
             @PathVariable("marca") String marca,
-            @PathVariable("cuerdas") Integer numCuerdas,
+            @PathVariable("numCuerdas") Integer numCuerdas,
             @PathVariable("tipoCuerdas") String tipoCuerdas,
             @PathVariable("afinacion") String afinacion
     ) {
