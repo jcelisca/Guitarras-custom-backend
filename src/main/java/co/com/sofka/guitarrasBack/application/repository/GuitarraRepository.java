@@ -7,13 +7,5 @@ import reactor.core.publisher.Mono;
 public interface GuitarraRepository {
     Mono<Guitarra> save(Guitarra guitarra);
     Flux<Guitarra> findAll();
-    Flux<Guitarra> findEspesificGuitar(
-            String tipo,
-            String modelo,
-            String marca,
-            Integer numCuerdas,
-            String tipoCuerdas,
-            String afinacion
-    );
-
+    Flux<Guitarra> findByTipo(String tipo);
 }

@@ -31,18 +31,14 @@ public class GuitarraController {
                 .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 
-    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}/{numCuerdas}/{tipoCuerdas}/{afinacion}")
-    public Flux<GuitarraDTO> findEspesificGuitar(
+    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}")
+    public Flux<GuitarraDTO> filtrarGuitarra(
             @PathVariable("tipo") String tipo,
             @PathVariable("modelo") String modelo,
-            @PathVariable("marca") String marca,
-            @PathVariable("numCuerdas") Integer numCuerdas,
-            @PathVariable("tipoCuerdas") String tipoCuerdas,
-            @PathVariable("afinacion") String afinacion
-    ) {
-        return service.findEspesificGuitar(tipo, modelo, marca, numCuerdas, tipoCuerdas, afinacion)
-                .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
+            @PathVariable("marca") String marca
+    ){
+        return service.findByTipo(tipo)
+                .filter(guitarra -> guitarra.getModelo().equals(modelo) && guitarra.getMarca().equals(marca))
+                .map(g->modelMapper().map(g, GuitarraDTO.class));
     }
-
-    //@GetMapping("/guitarra/{tipo}/{modelo}/")
 }

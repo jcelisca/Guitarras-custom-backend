@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Document(collection = "guitarra")
+@Document(collection = "guitarras")
 public class GuitarraDTO {
 
     @Id

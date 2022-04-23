@@ -19,15 +19,8 @@ public class GuitarraService {
         return repository.findAll();
     }
 
-    public Flux<Guitarra> findEspesificGuitar
-            (String tipo, String modelo,String marca,Integer numCuerdas,String tipoCuerdas,String afinacion){
-        return repository.findEspesificGuitar(
-                tipo,
-                modelo,
-                marca,
-                numCuerdas,
-                tipoCuerdas,
-                afinacion
-        );
+    public Flux<Guitarra> findByTipo(String tipo){
+        return repository.findByTipo(tipo);
     }
+
 }
