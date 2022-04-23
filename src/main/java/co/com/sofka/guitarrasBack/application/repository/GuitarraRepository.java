@@ -8,4 +8,5 @@ public interface GuitarraRepository {
     Mono<Guitarra> save(Guitarra guitarra);
     Flux<Guitarra> findAll();
     Flux<Guitarra> findByTipo(String tipo);
+    Flux<Guitarra> findByMarca(String marca);
 }

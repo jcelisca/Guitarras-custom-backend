@@ -38,4 +38,11 @@ public class GuitarraDTOService implements GuitarraRepository {
         return repository.findByTipo(tipo)
                 .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
     }
+
+    @Override
+    public Flux<Guitarra> findByMarca(String marca) {
+        return repository.findByMarca(marca)
+                .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitarra.class));
+    }
+
 }

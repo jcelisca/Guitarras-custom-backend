@@ -62,4 +62,12 @@ public class GuitarraController {
                 )
                 .map(g -> modelMapper().map(g, GuitarraDTO.class));
     }
+
+    @GetMapping("/guitarra/{marca}")
+    public Flux<GuitarraDTO> findByMarca(
+            @PathVariable("marca") String marca
+    ) {
+        return service.findByMarca(marca)
+                .map(g -> modelMapper().map(g, GuitarraDTO.class));
+    }
 }
