@@ -3,16 +3,11 @@ package co.com.sofka.guitarrasBack.infraestructure.rest.spring.controller;
 import co.com.sofka.guitarrasBack.application.service.GuitarraService;
 import co.com.sofka.guitarrasBack.domain.Guitarra;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraDTO;
-import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
