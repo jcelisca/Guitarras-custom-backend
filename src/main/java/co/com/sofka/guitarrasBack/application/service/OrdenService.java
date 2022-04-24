@@ -3,6 +3,7 @@ package co.com.sofka.guitarrasBack.application.service;
 import co.com.sofka.guitarrasBack.application.repository.OrdenRepository;
 import co.com.sofka.guitarrasBack.domain.Orden;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -12,5 +13,8 @@ public class OrdenService {
 
     public Mono<Orden> save(Orden orden){
         return repository.save(orden);
+    }
+    public Flux<Orden> findAll(){
+        return this.repository.findAll();
     }
 }
