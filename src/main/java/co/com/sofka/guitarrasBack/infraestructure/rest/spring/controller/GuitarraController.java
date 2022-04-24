@@ -37,24 +37,34 @@ public class GuitarraController {
                 .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 
-    @GetMapping("/guitarra/search")
-    public Flux<GuitarraDTO> filtrarGuitarra(@RequestBody GuitarraResponseDTO guitarraResponse) {
-        return service.findByTipo(guitarraResponse.getTipo())
-                .filter(guitarra -> guitarra.getModelo().equals(guitarraResponse.getModelo())
-                        && guitarra.getMarca().equals(guitarraResponse.getMarca()))
+    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}")
+    public Flux<GuitarraDTO> filtrarGuitarra(
+            @PathVariable("tipo") String tipo,
+            @PathVariable("modelo") String modelo,
+            @PathVariable("marca") String marca
+    ) {
+        return service.findByTipo(tipo)
+                .filter(guitarra -> guitarra.getModelo().equals(modelo) && guitarra.getMarca().equals(marca))
                 .map(g -> modelMapper().map(g, GuitarraDTO.class));
     }
 
+    @GetMapping("/guitarra/{tipo}/{modelo}/{marca}/{numCuerdas}/{tipoCuerdas}/{afinacion}")
+    public Flux<GuitarraDTO> filtrarGuitarraCompleto(
+            @PathVariable("tipo") String tipo,
+            @PathVariable("modelo") String modelo,
+            @PathVariable("marca") String marca,
+            @PathVariable("numCuerdas") Integer numCuerdas,
+            @PathVariable("tipoCuerdas") String tipoCuerdas,
+            @PathVariable("afinacion") String afinacion
 
-    @GetMapping("/guitarra/search/completo")
-    public Flux<GuitarraDTO> filtrarGuitarraCompleto(@RequestBody GuitarraResponseDTO guitarraResponse) {
-        return service.findByTipo(guitarraResponse.getTipo())
+    ) {
+        return service.findByTipo(tipo)
                 .filter(guitarra ->
-                        guitarra.getModelo().equals(guitarraResponse.getModelo()) &&
-                                guitarra.getMarca().equals(guitarraResponse.getMarca()) &&
-                                guitarra.getNumCuerdas().equals(guitarraResponse.getNumCuerdas()) &&
-                                guitarra.getTipoCuerda().equals(guitarraResponse.getTipoCuerda()) &&
-                                guitarra.getAfinacion().equals(guitarraResponse.getAfinacion())
+                        guitarra.getModelo().equals(modelo) &&
+                                guitarra.getMarca().equals(marca) &&
+                                guitarra.getNumCuerdas().equals(numCuerdas) &&
+                                guitarra.getTipoCuerda().equals(tipoCuerdas) &&
+                                guitarra.getAfinacion().equals(afinacion)
                 )
                 .map(g -> modelMapper().map(g, GuitarraDTO.class));
     }
