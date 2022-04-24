@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin("*")
 public class GuitarraController {
 
     private final GuitarraService service;

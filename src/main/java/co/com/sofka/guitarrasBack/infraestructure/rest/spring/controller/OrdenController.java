@@ -5,15 +5,13 @@ import co.com.sofka.guitarrasBack.domain.Orden;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.OrdenDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin("*")
 public class OrdenController {
 
     private final OrdenService service;
