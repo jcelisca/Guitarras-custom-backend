@@ -46,7 +46,7 @@ public class OrdenTestService {
 
         when(repository.save(any())).thenReturn(Mono.just(orden));
 
-        var mono = service.save(orden);
+        Mono<Orden> mono = service.save(orden);
 
         Assertions.assertEquals("gyig5", mono.block().getId());
         Assertions.assertEquals("hiu4h", mono.block().getIdGuitarra());
@@ -65,7 +65,7 @@ public class OrdenTestService {
 
         when(repository.findAll()).thenReturn(Flux.just(orden));
 
-        var mono = service.findAll();
+        Flux<Orden> mono = service.findAll();
 
         Assertions.assertEquals("gyig5", mono.blockFirst().getId());
         Assertions.assertEquals("hiu4h", mono.blockFirst().getIdGuitarra());

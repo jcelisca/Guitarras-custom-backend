@@ -45,7 +45,7 @@ public class OrdenTestController {
         orden.setComprobante("6235462354765");
         orden.setUID("igy3i4kh34uobio");
 
-        var mono = Mono.just(modelMapper().map(orden, Orden.class));
+        Mono<Orden> mono = Mono.just(modelMapper().map(orden, Orden.class));
         when(service.save(any())).thenReturn(mono);
 
         webTestClient.post()
