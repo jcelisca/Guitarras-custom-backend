@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-//@EnableReactiveMongoRepositories(basePackages = "co.com.sofka.guitarrasBack.infraestructure.db.springdata.repository")
 @RequiredArgsConstructor
 @Service
 public class OrdenDTOService implements OrdenRepository {
@@ -30,6 +29,12 @@ public class OrdenDTOService implements OrdenRepository {
     @Override
     public Flux<Orden> findAll() {
         return repository.findAll()
+                .map(ordenDTO -> modelMapper().map(ordenDTO, Orden.class));
+    }
+
+    @Override
+    public Mono<Orden> findById(String id) {
+        return repository.findById(id)
                 .map(ordenDTO -> modelMapper().map(ordenDTO, Orden.class));
     }
 }

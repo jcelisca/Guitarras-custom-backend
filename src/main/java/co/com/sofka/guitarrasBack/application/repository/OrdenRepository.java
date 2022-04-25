@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 public interface OrdenRepository {
     Mono<Orden> save(Orden orden);
     Flux<Orden> findAll();
+    Mono<Orden> findById(String id);
 }
