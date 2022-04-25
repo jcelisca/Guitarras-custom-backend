@@ -2,7 +2,7 @@ package co.com.sofka.guitarrasBack.application.service;
 
 
 import co.com.sofka.guitarrasBack.application.repository.GuitarraRepository;
-import co.com.sofka.guitarrasBack.domain.Guitarra;
+import co.com.sofka.guitarrasBack.domain.entity.Guitarra;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

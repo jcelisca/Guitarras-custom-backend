@@ -1,6 +1,6 @@
 package co.com.sofka.guitarrasBack.application.repository;
 
-import co.com.sofka.guitarrasBack.domain.Orden;
+import co.com.sofka.guitarrasBack.domain.entity.Orden;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

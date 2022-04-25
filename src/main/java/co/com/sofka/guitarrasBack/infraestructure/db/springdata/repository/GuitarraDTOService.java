@@ -1,7 +1,7 @@
 package co.com.sofka.guitarrasBack.infraestructure.db.springdata.repository;
 
 import co.com.sofka.guitarrasBack.application.repository.GuitarraRepository;
-import co.com.sofka.guitarrasBack.domain.Guitarra;
+import co.com.sofka.guitarrasBack.domain.entity.Guitarra;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

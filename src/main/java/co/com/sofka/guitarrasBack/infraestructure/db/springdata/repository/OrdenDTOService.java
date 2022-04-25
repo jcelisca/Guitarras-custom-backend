@@ -1,12 +1,10 @@
 package co.com.sofka.guitarrasBack.infraestructure.db.springdata.repository;
 
 import co.com.sofka.guitarrasBack.application.repository.OrdenRepository;
-import co.com.sofka.guitarrasBack.domain.Guitarra;
-import co.com.sofka.guitarrasBack.domain.Orden;
+import co.com.sofka.guitarrasBack.domain.entity.Orden;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.OrdenDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

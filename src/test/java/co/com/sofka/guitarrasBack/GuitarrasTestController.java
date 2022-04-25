@@ -1,7 +1,7 @@
 package co.com.sofka.guitarrasBack;
 
 import co.com.sofka.guitarrasBack.application.service.GuitarraService;
-import co.com.sofka.guitarrasBack.domain.Guitarra;
+import co.com.sofka.guitarrasBack.domain.entity.Guitarra;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraDTO;
 import co.com.sofka.guitarrasBack.infraestructure.rest.spring.controller.GuitarraController;
 import org.junit.jupiter.api.Assertions;

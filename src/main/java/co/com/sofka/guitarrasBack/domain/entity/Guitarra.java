@@ -1,4 +1,4 @@
-package co.com.sofka.guitarrasBack.domain;
+package co.com.sofka.guitarrasBack.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;

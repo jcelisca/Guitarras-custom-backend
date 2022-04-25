@@ -1,8 +1,7 @@
 package co.com.sofka.guitarrasBack;
 
 import co.com.sofka.guitarrasBack.application.service.OrdenService;
-import co.com.sofka.guitarrasBack.domain.Guitarra;
-import co.com.sofka.guitarrasBack.domain.Orden;
+import co.com.sofka.guitarrasBack.domain.entity.Orden;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.OrdenDTO;
 import co.com.sofka.guitarrasBack.infraestructure.rest.spring.controller.OrdenController;
 import org.junit.jupiter.api.Assertions;
@@ -41,7 +40,7 @@ public class OrdenTestController {
     void guardarOrden(){
         Orden orden = new Orden();
         orden.setId("gyig5");
-        orden.setIdGuitarra("hiu4h");
+//        orden.setIdGuitarra("hiu4h");
         orden.setComprobante("6235462354765");
         orden.setUID("igy3i4kh34uobio");
 
@@ -58,7 +57,7 @@ public class OrdenTestController {
                 .expectBody(Orden.class)
                 .value(response->{
                     Assertions.assertEquals("gyig5",response.getId());
-                    Assertions.assertEquals("hiu4h",response.getIdGuitarra() );
+//                    Assertions.assertEquals("hiu4h",response.getIdGuitarra() );
                     Assertions.assertEquals("6235462354765", response.getComprobante());
                     Assertions.assertEquals("igy3i4kh34uobio", response.getUID());
                 });

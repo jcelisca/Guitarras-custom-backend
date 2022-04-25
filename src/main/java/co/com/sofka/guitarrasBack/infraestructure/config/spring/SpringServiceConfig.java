@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SpringServiceConfig {
-
+class SpringServiceConfig {
     @Bean
     public GuitarraService serviceGuitarra(GuitarraRepository repository){
         return new GuitarraService(repository);
@@ -19,5 +18,4 @@ public class SpringServiceConfig {
     public OrdenService serviceOrden(OrdenRepository repository){
         return new OrdenService(repository);
     }
-
 }

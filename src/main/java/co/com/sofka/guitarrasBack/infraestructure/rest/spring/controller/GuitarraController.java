@@ -1,7 +1,7 @@
 package co.com.sofka.guitarrasBack.infraestructure.rest.spring.controller;
 
 import co.com.sofka.guitarrasBack.application.service.GuitarraService;
-import co.com.sofka.guitarrasBack.domain.Guitarra;
+import co.com.sofka.guitarrasBack.domain.entity.Guitarra;
 import co.com.sofka.guitarrasBack.infraestructure.db.springdata.dto.GuitarraDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,9 +21,9 @@ public class GuitarraController {
     }
 
     @PostMapping("/guitarra/crear")
-    public Mono<GuitarraDTO> save(@RequestBody GuitarraDTO guitarra) {
-        return service.save(modelMapper().map(guitarra, Guitarra.class))
-                .map(guitarra1 -> modelMapper().map(guitarra1, GuitarraDTO.class));
+    public Mono<GuitarraDTO> save(@RequestBody GuitarraDTO guitarraDTO) {
+        return service.save(modelMapper().map(guitarraDTO, Guitarra.class))
+                .map(guitarra -> modelMapper().map(guitarra, GuitarraDTO.class));
     }
 
 
