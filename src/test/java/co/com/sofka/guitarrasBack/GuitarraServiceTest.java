@@ -23,7 +23,7 @@ import static org.mockito.Mockito.any;
 @WebFluxTest
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes ={Guitarra.class, GuitarraDTO.class, GuitarraService.class})
-public class GuitarrasTestService {
+class GuitarraServiceTest {
 
     @MockBean
     private GuitarraRepository repository;
