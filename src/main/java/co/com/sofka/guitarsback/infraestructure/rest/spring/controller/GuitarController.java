@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "https://guitarras-custom-first.web.app")
@@ -23,6 +25,12 @@ public class GuitarController {
     @PostMapping("/guitarra/crear")
     public Mono<GuitarDTO> save(@RequestBody Guitar guitar) {
         return service.save(guitar)
+                .map(guitarra -> modelMapper().map(guitarra, GuitarDTO.class));
+    }
+
+    @PostMapping("/guitarra/crear/lista")
+    public Flux<GuitarDTO> saveAll(@RequestBody List<Guitar> guitarList) {
+        return service.saveAll(guitarList)
                 .map(guitarra -> modelMapper().map(guitarra, GuitarDTO.class));
     }
 

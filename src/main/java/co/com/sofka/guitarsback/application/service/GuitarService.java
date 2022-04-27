@@ -7,12 +7,17 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class GuitarService {
     private final GuitarRepository repository;
 
     public Mono<Guitar> save(Guitar guitar){
         return repository.save(guitar);
+    }
+    public Flux<Guitar> saveAll(List<Guitar> guitarList){
+        return repository.saveAll(guitarList);
     }
 
     public Flux<Guitar> findAll(){

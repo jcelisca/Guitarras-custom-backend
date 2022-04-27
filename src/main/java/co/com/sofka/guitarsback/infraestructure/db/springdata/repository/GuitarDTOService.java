@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+import java.util.UUID;
+
 @EnableReactiveMongoRepositories(basePackages = "co.com.sofka.guitarsback.infraestructure.db.springdata.repository")
 @RequiredArgsConstructor
 @Service
@@ -57,4 +60,14 @@ public class GuitarDTOService implements GuitarRepository {
                 .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitar.class));
     }
 
+    @Override
+    public Flux<Guitar> saveAll(List<Guitar> guitarList) {
+        return Flux.fromIterable(guitarList)
+                .flatMap(guitar -> {
+                    guitar.setId(UUID.randomUUID().toString().substring(0, 5));
+                    return repository.save(modelMapper().map(guitar, GuitarDTO.class));
+                })
+                        .map(guitarraDTO -> modelMapper().map(guitarraDTO, Guitar.class));
+
+    }
 }
