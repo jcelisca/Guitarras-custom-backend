@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "https://guitarras-custom-first.web.app/login")
+@CrossOrigin(origins = "https://guitarras-custom-first.web.app")
 public class OrderController {
 
     private final OrderService orderService;

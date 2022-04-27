@@ -30,11 +30,11 @@ public class OrderService {
     }
 
     public Double sumaDePrecios(List<ShoppingCart> shoppingCart) {
-        return shoppingCart.stream().collect(Collectors.summingDouble(i -> {
+        return shoppingCart.stream().mapToDouble(i -> {
             Double resultado = 0D;
             resultado += i.getTotal();
             return resultado;
-        }));
+        }).sum();
     }
 
     public Mono<Order> guardarOrden(Guitar guitar, Boolean luthier, String uid){
