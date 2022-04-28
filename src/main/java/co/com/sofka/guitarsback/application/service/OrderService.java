@@ -72,4 +72,15 @@ public class OrderService {
                     return Mono.empty();
                 });
     }
+
+    public Mono<Order> updateWithDocuement(Order order, String idOrden, String uid){
+        return repository.findById(idOrden)
+                .flatMap(order1 -> {
+                    if(uid.equals(order1.getUid())){
+                        order1.setComprobante(order.getComprobante());
+                        return save(order1);
+                    }
+                    return Mono.empty();
+                });
+    }
 }

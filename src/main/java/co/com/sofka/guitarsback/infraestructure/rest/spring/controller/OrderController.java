@@ -2,6 +2,7 @@ package co.com.sofka.guitarsback.infraestructure.rest.spring.controller;
 
 import co.com.sofka.guitarsback.application.service.OrderService;
 import co.com.sofka.guitarsback.domain.entity.Guitar;
+import co.com.sofka.guitarsback.domain.entity.Order;
 import co.com.sofka.guitarsback.infraestructure.db.springdata.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -37,6 +38,16 @@ public class OrderController {
             @PathVariable("comprobante") String comprobante
     ){
         return orderService.update(id,uid,comprobante)
+                .map(orden -> modelMapper().map(orden, OrderDTO.class));
+    }
+
+    @PutMapping("/orden/actualizar/{id}/{uid}")
+    public Mono<OrderDTO> updateWithDocument(
+            @RequestBody Order order,
+            @PathVariable("id") String id,
+            @PathVariable("uid") String uid
+    ){
+        return orderService.updateWithDocuement(order,id,uid)
                 .map(orden -> modelMapper().map(orden, OrderDTO.class));
     }
 
